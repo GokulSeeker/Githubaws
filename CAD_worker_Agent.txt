@@ -1,0 +1,145 @@
+CAD_worker_Agent
+
+Creo parametric download win -64 bit
+
+Installation path should be 
+D:/ptc/creo-xx
+D:/ptc/FTP
+
+Internet Explorer Enhanced Security Configuration
+
+If CAD Server is Windows 2012
+In Search type “Server Manager”. Click on it.
+Navigate to Local Server and then click IE Enhanced Security Configuration “On”.
+Make sure that Internet Explorer Enhanced Security Configuration (IE ESC) is off for both Administrators and Users.
+
+
+Software downloads
+On the D:\ drive, if not already created, create an InstallFiles directory.
+From PTC Support, download the latest datacode of both CREO Parametric & PRO/ENGINEER and CREO VIEW Adapters and ProductView to the InstallFiles directory.
+Download FileZilla Server from https://filezilla-project.org/download.php?type=server
+Download 7-zip software http://www.7-zip.org/download.html
+Install both FileZilla and 7-zip to the D:\ drive to their respective directories.
+Unzip the CREO Parametric File and CREO Adapters files.
+
+For License
+
+Ipconfigall get the address
+ask for license zip file
+save in c:/ptc/license
+
+Make sure that both PTC Creo Parametric and PTC Creo Simulate are designated.
+
+Clustered Server Set up
+
+For the CAD Worker server, the host file will need 
+IP Address
+Short Host Name
+Long Host Name
+Cluster Name
+
+Ping the server from cad
+
+add host in both Windchill and cad
+
+check the cerficate error
+
+Port setup
+
+Inbound rules 601,21,990,50000-50100
+
+check by ping or telnet 21 from windchill side
+
+port 5600 from cad worker
+
+Creo View Adapter configuration
+
+Create D:/FTP folder
+
+FTP directory create a folder nv-wc-partech-prd1-creo01
+
+D:\ptc\creo_view_adapters inside this create a folder nv-wc-partech-prd1-creo01
+
+Under Server Host enter in the load balancer name - nv-wc-prod.ptcmscloud
+Server Port is 5600
+
+FTP Setup
+
+Make sure FileZilla is connected.
+Navigate to Edit  Users
+Go to the General Page.
+Under the Users area, click Add. This will open a new window where we will add the FTP user.
+Enter the name of the FTP user (ftpuser) 
+Click OK
+You have been returned to the General page.
+In the Account settings area, click on Enable Account and Password. 
+Enter the password for the FTP user (ftpuser)
+Back on the General Page, open the Shared Folders page.
+Click Add
+Navigate to the FTP folder that you created during CreoView Adapter Configuration
+For Ex. :- D:\FTP 
+Click OK
+Grant all permissions to the FTP directory
+Click OK
+FTP is now set up
+Go to Setting->Passive Mode Setting
+Check Custom Port Range and enter 50000 - 50100
+
+
+CAD Worker Set Up in Windchill
+
+
+If the environment is clustered only one node must be up.
+For Ex. – All services of Prd1 is available and All Services of Prd2 is down. 
+
+
+Enter the Worker Execution command.This will be located at D:\ptc\creo_view_adapters\<customerFolder\<worker>.bat
+For Ex.: D:\ptc\creo_view_adapters\nv-wc-partech-prd1-creo01\proeworker.bat
+Change the Startup Time from 15 to 30 seconds
+Click Next
+
+
+Common File System
+The Windchill Machine Path is the ftp address for the customer.
+Example: ftp:/nv-customer-creo01
+
+The Path Worker is the folder in the D:\ drive.
+
+Example: D:\ftp\customer-creo01
+Enter in the FTP Username and Password
+Click Next.
+
+<Property name="worker.exe.whitelist.prefixes" overridable="true" 
+      targetFile="codebase/WEB-INF/conf/wvs.properties" 
+       value="D:\"/> 
+
+<Property name="wt.auth.trustedHosts" overridable="true“ 
+       targetFile="codebase/wt.properties“ 
+       value=“eu-ire-pdr-cad3 10.114.15.166"/>
+	   
+auth.properties
+
+auth=$USER 
+xconfmanager –p
+restart windchill
+
+Install visual studio
+
+https://www.microsoft.com/en-US/download/confirmation.aspx?id=5555
+
+
+Installing telnet 
+
+Telnet is a feature that is available through the Server Manager.
+Open Server Manger
+In the left column click on Features
+In the Features window, click on Add Features
+Check Telnet Client and Install
+Telnet is now installed on the server
+
+	   
+
+
+
+
+

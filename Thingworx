@@ -1,0 +1,61 @@
+
+Thingworx apache
+
+/etc/systemd/system
+
+systemctl start ThingWorx-Foundation
+
+systemctl start Thingworx-IntegrationRuntime 
+
+/appl/ptc/ThingworxNavigate/scripts/Thingworx-IntegrationRuntime start
+
+23fc4b2a-e423-4953-b440-3123fb1b9a0a
+
+cd /etc/systemd/system
+
+
+Install as root
+
+export PATH=$PATH:/appl/ptc/Windchill_11.1/Java/bin
+
+java -jar 11.1-M020_WCTWXExtension_13.jar --install /appl/ptc/Windchill_11.1/Windchill
+
+
+
+
+The certificates should be added one after the other in the wctwx_ca-bundle.crt file.
+
+Next, change to the following directory:
+/appl/ptc/Windchill_11.1/HTTPServer/conf/sslvhostconf.d
+
+Create a new file called ssl.conf with the following:
+
+SSLVerifyDepth  10
+SSLCACertificateFile "/appl/ptc/Windchill_11.1/HTTPServer/conf/wctwx_ca-bundle.crt"
+
+Restart the Windchill apache.
+./apachectl stop
+./apachectl -DSSL
+
+Ensure Windchill is setup to run in SSL mode. From a Windchill shell, do the following:
+
+cd <HTTPSERVER_HOME>ant -f webAppConfig.xml -DappName=[windchill-web-app] -Dresource=sslClientAuth -DresourceAuthType=sslClientAuth addAuthResource
+
+ant -f webAppConfig.xml -DappName=Windchill -Dresource=sslClientAuth -DresourceAuthType=sslClientAuth addAuthResource
+
+Edit web.xml TrustedSSLAuthFilter to allow the PTC Cloud certificate as follows:
+
+  <filter>
+    <description>Filter allowing a trusted SSL certificate to specify the remote user for the request</description>
+    <filter-name>TrustedSSLAuthFilter</filter-name>
+    <filter-class>wt.httpgw.filter.TrustedAuthFilter</filter-class>
+    <init-param>
+      <param-name>trustTrustedHosts</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>trustedSubjectPattern.1</param-name>
+      <param-value>.*cloud.thingworx.com.*</param-value>
+    </init-param>
+  </filter>
+

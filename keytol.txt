@@ -1,0 +1,11 @@
+Namakal
+
+78.18846495506773
+11.189116656315495
+
+
+keytool -import -alias SI-DSK-007.sconce.local -file C:\ptc\Windchill_11.0\HTTPServer\conf\server.crt -storetype jks -keystore C:\ptc\Windchill_11.0
+
+keytool -import -alias SI-DSK-007.sconce.local -file C:\ptc\Windchill_11.0\HTTPServer\conf\server.crt -storetype jks -keystore C:\ptc\Windchill_11.0\Java\jre\lib\security\cacerts
+
+keytool -list -v -keystore C:\ptc\Windchill_11.0\Java\jre\lib\security\cacerts

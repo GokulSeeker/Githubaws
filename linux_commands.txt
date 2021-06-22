@@ -1,0 +1,217 @@
+﻿LINUX COMMANDS:
+
+In Bitvise xterm,
+
+ssh -L 5981:localhost:5981 eu-ire-wc-kngfsr-prd1   -----> run from bastion
+
+ssh eu-ire-wc-kngfsr-prd1  ------> for connecting to server
+
+vncserver :81  -----> to create vnc
+
+North Virginia	   nv
+Tokyo	           aptok	
+North CA	       nca
+Frankfurt	       eufra
+Singapore	       apsin
+Dublin	           eu-ire
+Mumbai	          bom
+ 
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+xhost +   -------> prevent other access, this has to be perfomed from our username
+
+mkdir /tmp/jmanoharan   -------> to create a new directory    (only when home dir is not created)
+
+export HOME=/tmp/jmanoharan   (only when home dir is not created)
+
+echo $DISPLAY  ------> to check our vnc port
+
+export DISPLAY=:72    -----> example 72 refers to vnc port
+
+exit    ----------> this command will close a terminal window
+
+export _JAVA_OPTIONS=-Djava.io.tmpdir=/appl/tmp
+
+export IATEMPDIR=/appl/tmp
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+mkdir -p /appl/tmp   -------> create tmp
+
+mv tmp tmp_bk    -------> rename tmp as tmp_bk
+
+cp -R /appl/ptc/Windchill_11.0 /appl/backup/  --------> to copy Windchill_11.0 to the backup folder
+
+history | grep wcadmin
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+chown -R wtadmin:wind /appl/
+
+chmod -R 775 /appl/
+
+ps -ef | grep java   --------> to check running java services (DS also shown with this) 
+
+ps -ef | grep httpd   --------> to check http is runnig
+
+ps -ef | grep WindchillDS   -------> to check Windchill DS is running
+
+kill -09 (pid)   -------> example: kill -09 2467 where 2467 is the pid -----  perform this command with root user
+
+
+sudosu – wtadmin
+
+cd tomcat/instances
+
+rm -rf *
+
+cd ../..
+
+cd tasks/codebase/com/infoengine/compiledTasks
+
+rm -rf file/
+
+wtadmin> rm -rf $WT_HOME/tomcat/instances/*
+
+wtadmin> rm -rf $WT_HOME/tasks/codebase/com/infoengine/compiledTasks/file
+
+df -h check space
+
+rm -Rf ~/.Xauthority ~/.vnc 
+
+FC-F8-AE-0E-DD-E6
+
+
+ As a wtadmin 
+ 
+appl/ptc/Windchill_11.0/Windchill/bin
+
+./windchill shell
+
+windchill start
+
+windchill stop
+
+As a root 
+
+/appl/ptc/Windchill_11.1/HTTPServer/bin - location to start and stop apache
+
+./apachectl stop
+
+./apachectl -DSSL
+
+/appl/ptc/Windchill_11.1/WindchillDS/server/bin
+
+./start-ds
+./stop-ds
+
+./start-ds
+
+./stop-ds
+
+windchil wt.auth.Authentication
+
+windchill status
+
+vi ~/.bashrc
+source ~/.bashrc
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+wget -O <filename.zip> "urllink"   -----------> for downloading respective CD's 
+
+yum install wget   ------> to install wget  
+
+zip -r conf.zip conf  ---------> to zip
+
+unzip CPS14.zip -d CPS14    --------> for unzipping/extracting
+
+tar -czvf /vault/Windchill_11.1.tar.gz Windchill_11.1    -------> to zip and copy from node1 to vault
+
+tar -xvzf /vault/Windchill_11.1.tar.gz Windchill_11.1    --------> to unzip and copy from vault to node2
+
+export PATH=$PATH:/appl/ptc/Windchill_11.0/Java/bin
+
+tail -f <filename>    ----------> to view that file
+
+vi /<path_location>   ---------> to edit that file 
+
+:wq    -------> save and quit
+
+:q!  --------> quit discard save
+
+more    --------> to view the contents of text file one screen at a time
+
+cat    ---------> to edit files
+
+df -h
+
+df -h | grep ptc  -----> shows space available
+
+du -sh <folder name>   -----> shows folder size
+
+windchill com.ptc.windchill.migration.wbm.DataLoadRouterImp -u wcadmin -p <password>
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+pwd  -----> shows full pathname of current working directory
+
+hostname  ----->
+
+sudo bash ------> switch user to root
+
+su - wtadmin  -----> switch user to wtadmin
+
+cd ..    -----> to go back
+
+ls  ------> lists files in current working directory
+
+ls -ltr   ------> lists files in long listing format, time..
+
+vi ~/.bash_profile
+
+solr install from wtadmin
+
+scp -r gpkumar@ei-wc-clas-l-stage3-n1.eu-west-1.ptcloud.com:/home/gpkumar/20191227_134237--clasohlson-INSTALL .
+
+scp file gpkumar@server:/home
+
+
+lsof /appl
+
+ vi /usr/lib/oracle/12.1/client64/tnsnames.ora
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+https://secure.ataata.com/user/library
+
+
+
+c – create a archive file.
+x – extract a archive file.
+v – show the progress of archive file.
+f – filename of archive file.
+t – viewing content of archive file.
+j – filter archive through bzip2.
+z – filter archive through gzip.
+r – append or update files or directories to existing archive file.
+W – Verify a archive file
+	
+	
+	
+
+
+Connectpage - gkumar/gokul123
+Bash-  gkumar1/erv78ect
+
+PTCcsset123
+
+
+ 52.29.15.113 - ef
+ 54.173.11.114 -nv
+ 52.51.68.99 - ire
+ 52.8.97.24 - usnca
+

@@ -1,0 +1,84 @@
+Solr Installation steps:
+
+Prerequisites:
+
+Note : If it is a FlexPLM Customer then Solr must be installed after FlexPLM installation
+
+Environment:
+
+Monolithic - PSI index search server, path of windchill java
+
+Cluster - JDK, PSI index search server (seperate environment)
+
+Dont select the high availabilty
+
+
+Solr Server Installation
+ 
+Create a directory named /appl/ptc/Windchill_11.0-SolrServer
+
+Stop the windchill application.
+
+Run the PSI installer 
+
+1. Select 'New Product’Installation
+2. Select 'Standalone Product or Component’: 
+3. Select 'PTC Windchill Index Search Server’: 
+ Install as a root user
+ 
+Select the installation directory
+
+For monolithic server select the java directory from Windchill application
+Enter the alias name for Index Host Name 
+Port number should be 8085
+Username : solrAdmin , pwd 
+
+
+Note : If it is a FlexPLM customer then follow below steps , If not skip
+
+Navigate toWindchill server [WT_HOME/src/com/lcs/properties/solr], copy    
+
+conf_generic_fields.xml
+solrconfig.xml
+
+To SOLR SERVER
+At location : 
+SOLR_HOME/solr_schemes/wblib/conf/
+
+
+How to solr server
+After adding flex xml then start
+
+Star the Solr Server by Navigating to SOLR_HOME/bin : ./Index_Search_Server.sh start
+
+Navigate to below location :
+appl/ptc/Windchill_11.0-SolrServer/SolrServer/solr/bin  (cluster)
+
+SET JAVA PATH . 
+PATH=$PATH:appl/ptc/Windchill_11.0-SolrServer/SolrServer/java/bin
+
+Error whille creating lib means your not setting java path
+
+Creating Cores : 
+./solr create -c wblib -n wblib -d /appl/ptc/Windchill_11.0-SolrServer/SolrServer/solr_schemas/wblib
+./solr create -c clfstructurelib -n clfstructurelib -d /appl/ptc/Windchill_11.0-SolrServer/SolrServer/solr_schemas/clfstructurelib
+./solr create -c sisaadlib -n sisaadlib -d /appl/ptc/Windchill_11.0-SolrServer/SolrServer/solr_schemas/sisaadlib
+
+
+
+Windchill solr server post configuration:
+
+xconfmanager -s wt.index.solrAdminUser=solrAdmin -t codebase/WEB-INF/conf/index.solrAuth.properties -p
+xconfmanager -s wt.index.solrAdminPassword=xxxxx -t codebase/WEB-INF/conf/index.solrAuth.properties –p
+xconfmanager -s wt.index.enableIndexSearchHighAvailability=false -t codebase/wt.properties -p
+xconfmanager -s wt.index.federatedLibraries=wblib -t codebase/wt.properties -p
+xconfmanager -s wt.index.federatedLibrariesForSearch=wblib -t codebase/wt.properties –p
+xconfmanager -s wt.index.solrEffectiveUid=solrAdmin -t codebase/wt.properties -p
+xconfmanager -s wt.index.solrHost=alias name of server -t codebase/wt.properties –p (Clustered Server : Refer /etc/hosts of Solr Server ) 
+xconfmanager -s wt.index.solrProtocol=http -t codebase/wt.properties -p
+xconfmanager -s wt.index.solrPort=8085 -t codebase/wt.properties -p
+xconfmanager -s wt.index.enabled=true -t codebase/wt.properties –p
+After this Run the Bulk Indexing Tool from Windchill shell or from UI ->Windchill Home Page -> Site->Utilities -> Indexing Administration
+
+
+#http - protocol for all environment

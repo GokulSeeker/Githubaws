@@ -1,0 +1,48 @@
+######################################
+#
+#   BAC UI deployment instructions   
+#
+######################################
+#
+#  Execute following steps as 
+#
+#            wtadmin
+#
+######################################
+
+cp /share/Windchill_Install_Files/wisp_stage/BAC_UI/SIC_BACREST_V0.1.3.zip /appl/ptc/builds/
+cd /appl/ptc/builds
+unzip /appl/ptc/builds/SIC_BACREST_V0.1.3.zip -d SIC_BACREST_V0.1.3
+
+cd /appl/ptc/builds/SIC_BACREST_V0.1.3
+ant
+
+######################################
+#
+#   Follow Installation instructions on screen
+#      Provide site admin UserName and Password
+#      Choose 1 as Installation Type
+#
+#   Add BAC Administrator to Groups
+#      As Site Admin
+#      Open the Site > Utilities > Participant Administration Page
+#         Search for Group:   Business Administrative Change Package Creator
+#             Add as member the people identified to Create BAC Packages (on DEV only)
+#         Search for Group:   Business Administrative Change Package Importer
+#             Add as member the people identified to Import BAC Packages (on DEV only)
+#
+######################################
+
+After updating an application already having BAC-UI install to version using WRS1.7; the Custom BAC-UI Domain has to be removed.
+
+Remove Jar file:
+
+$WT_HOME/codebase/WEB-INF/lib/wcBACMgmt.jar
+
+Remove Custom BAC UI domain:
+
+$WT_HOME/codebase/rest/custom/domain/BACMgmt.json
+
+and folder
+
+$WT_HOME/codebase/rest/custom/domain/BACMgmt

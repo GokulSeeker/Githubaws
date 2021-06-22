@@ -1,0 +1,78 @@
+cd /appl/ptc/Windchill_11.1/HTTPServer
+ cp /home/gkumar1/server.crt /appl/ptc/Windchill_11.1/HTTPServer/conf/
+ cp /home/gkumar1/server.key /appl/ptc/Windchill_11.1/HTTPServer/conf/
+
+go to HTTPServer from shell
+ ant -DHTTPS_ENABLED=true -f config.xml reconfigure
+ 
+ cp /appl/ptc/Windchill_11.1/Java/jre/lib/security/cacerts /appl/ptc/Windchill_11.1/Java/jre/lib/security/jssecacerts
+ 
+ go to java/bin
+ ./keytool -import -alias abbhv-dev2.ptcmscloud.com -file /appl/ptc/Windchill_11.1/HTTPServer/conf/server.crt -storetype jks -keystore /appl/ptc/Windchill_11.1/Java/jre/lib/security/jssecacerts
+
+
+xconfmanager -s wt.httpgw.mapCodebase=https://abbhv-dev2.ptcmscloud.com/Windchill -t "codebase/wt.properties" -p
+xconfmanager -s 'wt.webserver.protocol=https' -s 'wt.webserver.port=443' -t 'codebase/wt.properties' -p
+xconfmanager -s wt.fv.fvFileThreshold=65000 -t "codebase/wt.properties" -p
+xconfmanager -s wt.fv.useFvFileThreshold=true -t "codebase/wt.properties" -p
+xconfmanager -s wt.fv.forceContentToVault=true -t "codebase/wt.properties" -p 
+xconfmanager -s "wt.manager.monitor.services=MethodServer BackgroundMethodServer" -t codebase/wt.properties -p
+xconfmanager -s wt.manager.monitor.start.BackgroundMethodServer=1 -t codebase/wt.properties -p
+xconfmanager -s wt.queue.executeQueues=false -t codebase/wt.properties -p
+xconfmanager -s 'wt.manager.cmd.ServerManager=$(wt.manager.cmd.ServerManager.java.command)' -s 'wt.manager.cmd.MethodServer=$(wt.manager.cmd.MethodServer.java.command)' -s 'wt.manager.log.tee=false' -s 'wt.method.log.tee=false' -t 'codebase/wt.properties' -p
+
+
+
+mkdir -p /appl/ptc/Windchill_11.1/Windchill/wtSafeArea/siteMod/codebase/netmarkets/jsp/org/
+mkdir -p /appl/ptc/Windchill_11.1/Windchill/wtSafeArea/ptcOrig/codebase/netmarkets/jsp/org/
+cp /appl/listUtilities.jsp /appl/ptc/Windchill_11.1/Windchill/wtSafeArea/siteMod/codebase/netmarkets/jsp/org/listUtilities.jsp
+cp /appl/ptc/Windchill_11.1/Windchill/codebase/netmarkets/jsp/org/listUtilities.jsp /appl/ptc/Windchill_11.1/Windchill/wtSafeArea/ptcOrig/codebase/netmarkets/jsp/org/listUtilities.jsp
+cp /appl/ptc/Windchill_11.1/Windchill/wtSafeArea/siteMod/codebase/netmarkets/jsp/org/listUtilities.jsp /appl/ptc/Windchill_11.1/Windchill/codebase/netmarkets/jsp/org/listUtilities.jsp
+
+
+Solr Installation steps:
+
+xconfmanager -s wt.index.solrAdminUser=solrAdmin -t codebase/WEB-INF/conf/index.solrAuth.properties -p
+xconfmanager -s wt.index.solrAdminPassword=EuLVNp6v -t codebase/WEB-INF/conf/index.solrAuth.properties -p
+
+
+<Property name="wt.index.solrEffectiveUid" overridable="true"
+targetFile="codebase/wt.properties"
+value="wcadmin"/>
+<Property name="wt.index.solrHost" overridable="true"
+targetFile="codebase/wt.properties"
+value="alias.ptcmscloud.com"/>
+<Property name="wt.index.solrProtocol" overridable="true"
+targetFile="codebase/wt.properties"
+value="http"/>
+<Property name="wt.index.solrPort" overridable="true"
+targetFile="codebase/wt.properties"
+value="8085"/>
+<Property name="wt.index.enabled" overridable="true"
+targetFile="codebase/wt.properties"
+value="true"/>
+=====
+
+   <Property name="wt.index.solrEffectiveUid" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="wcadmin"/>
+   <Property name="wt.index.solrHost" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="abbhv-dev2.ptcmscloud.com"/>
+   <Property name="wt.index.solrProtocol" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="http"/>
+   <Property name="wt.index.solrPort" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="8085"/>
+   <Property name="wt.index.enabled" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="true"/>
+			 
+			 
+			 
+			 
+			 
+export ANT_HOME=/appl/ptc/Windchill_11.1/Windchill/ant
+export JAVA_HOME=/appl/ptc/Windchill_11.1/Java
+export PATH=$PATH:$ANT_HOME/bin

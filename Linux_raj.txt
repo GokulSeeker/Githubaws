@@ -1,0 +1,175 @@
+1. Type of Users: 
+
+•	Dollar sign ($) means you are a normal user.
+•	hash (#) means you are the system administrator (root).
+•	In the C shell, the prompt ends with percentage sign (%).
+        '~' logged in user
+---------------------------------------------------------------------
+
+
+2. Different Unix or GNU/Linux distributions:
+
+• Prompt of Debian/Ubuntu is    - guest@linux:~$ 
+• Fedora/CentOS/RedHat is       - [guest@linux ~]$
+• SuSE Linux/OpenSUSE is        - guest@linux:~> 
+---------------------------------------------------------------------
+
+3.Commands:
+
+ls                                  - The list command
+---------------------------------------------------------------------
+
+ls -l                                - List and Total file
+---------------------------------------------------------------------
+whoami                               - indentify key
+---------------------------------------------------------------------
+su <username>                        - Ping user
+---------------------------------------------------------------------
+cd ../
+cd <path>                            -  change directory (eg.cd C:\ptc\windchill)
+--------------------------------------------------------------------------------------
+mv <File> <Destination path>         - move file (eg.mv test.1 /Home/User1/Picture/)
+---------------------------------------------------------------------------------------
+pwd                                   - Print working Directory
+------------------------------------------------------------------------------------------
+mkdir                                 - Make directory (eg. mkdir soft_type)
+------------------------------------------------------------------------------------------
+rmdir                                - remove directory (eg. rmdir soft_type)
+---------------------------------------------------------------------------------------
+clear                                 - clear the previous entry
+--------------------------------------------------------------------------------------------
+ls -a                                 - Hiden files (starts from dot '.' are hiden files)
+-------------------------------------------------------------------------------------------
+locate                                - Find files (eg. locate windchill)
+-------------------------------------------------------------------------------------------
+chmod                                 - change mode eg.chmod (options) mode filename
+ 
+				         options : -r, -f, -v
+				         mode    : read(r), write(w), execute(x)
+					 ex. chmod -R 777 filename
+-------------------------------------------------------------------------------------------
+locate | less                         - Check line by line
+-------------------------------------------------------------------------------------------
+ps aux                                - Show the running process
+-----------------------------------------------------------------------------------
+
+ctrl+Z                                - Stop the running program
+-----------------------------------------------------------------------------------
+cat /etc/passwd                        - List the users
+----------------------------------------------------------------------------------
+nano                                  -  nano is a text editor for Unix
+---------------------------------------------------------------------
+man                                    - format and display the online manuel page
+-----------------------------------------------------------------------------------
+useradd                                 - add use
+----------------------------------------------------------------------------------------
+sudo usermod -a -G <group> <user>       - add user in group
+----------------------------------------------------------------------------------------
+sudo chrown -R :<Group> <Folder path>   - give -R recursive permission to user and path
+----------------------------------------------------------------------------------------
+sudo chmod -R g+rwx <folder path>       - rwx permission
+-------------------------------------------------------------------------------------
+mv <source folder path> <target folder path> - move folders
+------------------------------------------------------------------------------------
+cat <file1> <file2>                       - list whole content in both files 
+------------------------------------------------------------------------------------
+sudo su - wtadmin                        - ping to root user 
+------------------------------------------------------------------------------------
+vi <filename>				- text editor
+
+i   				  	- Edit mode
+ESc                                	- quit edit mode
+:qw                                	- save, come out of the editor
+q!                                 	- Comeout without save changes made
+--------------------------------------------------------------------------------------
+cp <source> <target>                 - copy the file from one server to local server
+--------------------------------------------------------------------------------------
+chmod 777 <path>			- Change permission of folder
+-------------------------------------------------------------------------------------
+rwx - read write execute; r=4, w=2, x=1
+
+x xxx xxx xxx - Directory Owner Group Others
+-------------------------------------------------------------------------------------
+cp <source> <target>   - copy the file 
+-------------------------------------------------------------------------------------
+rm                      - remove file
+rm -r <Foldername>      - remove the directory
+-------------------------------------------------------------------------------------
+echo $JAVA_HOME
+vi ~/.bash_profile
+add line: export JAVA_HOME=/usr/jre.1.6.0
+-------------------------------------------------------------------------------------
+uname -a             - information about the linux system
+cat                  - view the program
+passwd               - change password
+history              - show history
+echo                 - echo the word
+env 		     - display your user environment settings
+whoami               - display user name
+------------------------------------------------------------------------
+switch user in CentOS
+
+sudo rajkumer
+su - 
+--------------------------------------------------------
+
+vncserver :12
+
+vncserver -kill :12 [To kill vncserver]
+------------------------------------------------------------------
+
+df -H  -show size in MB
+ls -lh  -file size in folder
+---------------------------------------------------------------
+unzip - tecmint_files.zip -d /tmp/unziped   - unzip
+create zip - zip -r tecmint_files.zip tecmint_files 
+---------------------------------------------------------
+wget -o CPS.ZIP <URL>
+systemctl list-units --type service  : find the running service
+ls -Aq | wc -l   : list total file number
+--------------------------------------------------
+untar the file     -   tar -xvzf college.tar.gz
+different directory -  tar -C /myfolder -zxvf yourfile.tar.gz
+--------------------------------------------------------
+tar the file : tar -czvf /vault/Windchill_11.0_bak.tar.gz Windchill_11.0
+exclude      : tar -pczf MyBackup.tar.gz /home/user/public_html/ --exclude "/home/user/public_html/tmp/" 
+---------------------------------------------
+yum install wget    - install the wget 
+---------------------------------------------
+create zip : zip -r conf.zip conf
+-----------------------------------
+wget -O PSI.zip "url" 
+------------------------------------------------
+export DISPLAY=:12
+-------------------------
+df -h
+---------------------
+source ~/.bash_profile
+----------------------------
+select * from tab;
+select table_name, status, from user_tables;
+------------------------------------------------
+tar /home/rpoosamy/windchill.tar.gz Windchill
+------------------------------------------------
+du -h <folder name>   - File size 
+---------------------------------------------------------
+du -csh                - grand total size
+---------------------------------------------------
+export _JAVA_OPTIONS=-Djava.io.tmpdir=/appl/tmp
+export IATEMPDIR=/appl/tmp                            
+
+-----------------------------------------
+groupadd -g 103 wind 
+
+find file name
+find /appl/ptc/Windchill_11.1-Solr/ -name conf_generic_fields.xml
+find -name agent.ini
+
+
+[rpoosamy@bastion-ire ~]$ scp -r rpoosamy@eu-ire-wc-clasohlson-trn1.eu-west-1.ptcloud.com:/appl/ptc/Windchill_11.0/HTTPServer/conf .
+scp server-ca.RENAMETOcer rpoosamy@eu-ire-wc-clasohlson-trn1:/home/rpoosamy/ :from local to bastion
+scp -r server-ca.RENAMETOcer rpoosamy@eu-ire-wc-clasohlson-trn1:/home/rpoosamy/ : move folder from local to bastion
+
+groupadd -g 103 wind 
+===============================================================
+Update_Tool -username wcadmin -password NWJjN2UxYjZ -noui
